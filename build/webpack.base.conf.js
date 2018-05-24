@@ -11,6 +11,7 @@ function resolve (dir) {
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
+  // 执行顺序，前置，还有一个选项是post是后置
   enforce: 'pre',
   include: [resolve('src'), resolve('test')],
   options: {

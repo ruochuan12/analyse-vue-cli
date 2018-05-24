@@ -2,8 +2,9 @@
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
-
+// 命令行中的loading
 const ora = require('ora')
+// 删除文件或文件夹
 const rm = require('rimraf')
 const path = require('path')
 const chalk = require('chalk')

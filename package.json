@@ -68,6 +68,7 @@
     "url-loader": "^0.5.8",
     "vue-jest": "^1.0.2",
     "vue-loader": "^13.3.0",
+    // Vue单文件中的样式解析loader,类似于style-loader，使用vue-style-loader可以热更新，style-loader不能。
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
