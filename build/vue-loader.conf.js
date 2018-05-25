@@ -13,6 +13,7 @@ module.exports = {
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
+  // vue单文件中，图片等资源转成require的形式
   transformToRequire: {
     video: ['src', 'poster'],
     source: 'src',
