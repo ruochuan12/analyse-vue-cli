@@ -1,3 +1,4 @@
+```
 {
   "name": "analyse-vue-cli",
   "version": "1.0.0",
@@ -67,8 +68,11 @@
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-jest": "^1.0.2",
+    // 处理vue单文件的loader 中文文档：https://vue-loader-v14.vuejs.org/zh-cn/
     "vue-loader": "^13.3.0",
+    // Vue单文件中的样式解析loader,类似于style-loader，使用vue-style-loader可以热更新，style-loader不能。
     "vue-style-loader": "^3.0.1",
+    // 把 vue-loader 提取出的 HTML 模版编译成对应的可执行的 JavaScript 代码，这和 React 中的 JSX 语法被编译成 JavaScript 代码类似。预先编译好 HTML 模版相对于在浏览器中再去编译 HTML 模版的好处在于性能更好。
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
@@ -85,3 +89,4 @@
     "not ie <= 8"
   ]
 }
+```

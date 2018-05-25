@@ -44,6 +44,7 @@ module.exports = {
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
+        // vue-loader中文文档：https://vue-loader-v14.vuejs.org/zh-cn/
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
