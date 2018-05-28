@@ -1,14 +1,19 @@
 'use strict'
 const path = require('path')
+// 引入配置文件config/index.js
 const config = require('../config')
+// 提取css的插件
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// 引入package.json配置
 const packageConfig = require('../package.json')
-
+// 返回路径
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
 
+  // 生成跨平台的路径
+  // 更多查看Node API链接：https://nodejs.org/api/path.html#path_path_posix
   return path.posix.join(assetsSubDirectory, _path)
 }
 
@@ -81,8 +86,8 @@ exports.styleLoaders = function (options) {
 
   return output
 }
-
 exports.createNotifierCallback = () => {
+  // 'node-notifier'是一个跨平台系统通知的页面，当遇到错误时，它能用系统原生的推送方式给你推送信息
   const notifier = require('node-notifier')
 
   return (severity, errors) => {

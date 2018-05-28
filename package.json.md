@@ -5,6 +5,7 @@
   "description": "analyse-vue-cli",
   "author": "轩辕Rowboat <lxchuan12@163.com>",
   "private": true,
+  // Npm Script 底层实现原理是通过调用 Shell 去运行脚本命令
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -14,10 +15,12 @@
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js"
   },
+  // 生产环境依赖
   "dependencies": {
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
+  // 开发环境依赖
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",

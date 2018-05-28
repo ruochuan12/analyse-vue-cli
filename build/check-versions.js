@@ -1,4 +1,5 @@
 'use strict'
+// 控制台输入样式 chalk 更多查看：https://github.com/chalk/chalk
 const chalk = require('chalk')
 const semver = require('semver')
 const packageConfig = require('../package.json')
