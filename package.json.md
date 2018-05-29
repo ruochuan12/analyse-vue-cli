@@ -7,13 +7,20 @@
   "private": true,
   // Npm Script 底层实现原理是通过调用 Shell 去运行脚本命令
   "scripts": {
+    // dev webpack-dev-server --config 指定配置文件
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    // npm run start等同于运行npm run dev
     "start": "npm run dev",
+    // jest测试
     "unit": "jest --config test/unit/jest.conf.js --coverage",
+    // e2e测试
     "e2e": "node test/e2e/runner.js",
+    // 运行jest测试和e2e测试
     "test": "npm run unit && npm run e2e",
+    // eslint
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    // node 执行build/build.js文件
+  "build": "node build/build.js"
   },
   // 生产环境依赖
   "dependencies": {
