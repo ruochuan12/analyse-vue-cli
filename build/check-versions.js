@@ -2,6 +2,7 @@
 // 控制台输入样式 chalk 更多查看：https://github.com/chalk/chalk
 const chalk = require('chalk')
 const semver = require('semver')
+// package.json配置
 const packageConfig = require('../package.json')
 const shell = require('shelljs')
 
@@ -13,6 +14,7 @@ const versionRequirements = [
   {
     name: 'node',
     currentVersion: semver.clean(process.version),
+    // 这里配置是"node": ">= 6.0.0",
     versionRequirement: packageConfig.engines.node
   }
 ]
@@ -21,6 +23,7 @@ if (shell.which('npm')) {
   versionRequirements.push({
     name: 'npm',
     currentVersion: exec('npm --version'),
+    // 这里配置是"npm": ">= 3.0.0"
     versionRequirement: packageConfig.engines.npm
   })
 }

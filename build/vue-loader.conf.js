@@ -3,7 +3,9 @@ const utils = require('./utils')
 const config = require('../config')
 const isProduction = process.env.NODE_ENV === 'production'
 const sourceMapEnabled = isProduction
+  // 这里是true
   ? config.build.productionSourceMap
+  // 这里是true
   : config.dev.cssSourceMap
 // 更多配置 可以查看vue-loader中文文档：https://vue-loader-v14.vuejs.org/zh-cn/
 module.exports = {
@@ -15,6 +17,7 @@ module.exports = {
   }),
   // 是否开启cssSourceMap，便于调试
   cssSourceMap: sourceMapEnabled,
+  // 这里是true
   cacheBusting: config.dev.cacheBusting,
   // vue单文件中，在模板中的图片等资源引用转成require的形式。以便目标资源可以由 webpack 处理。
   transformToRequire: {

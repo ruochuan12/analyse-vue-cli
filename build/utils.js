@@ -9,15 +9,26 @@ const packageConfig = require('../package.json')
 // 返回路径
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
+    // 二级目录 这里是 static
     ? config.build.assetsSubDirectory
+    // 二级目录 这里是 static
     : config.dev.assetsSubDirectory
 
-  // 生成跨平台的路径
+  // 生成跨平台兼容的路径
   // 更多查看Node API链接：https://nodejs.org/api/path.html#path_path_posix
   return path.posix.join(assetsSubDirectory, _path)
 }
 
 exports.cssLoaders = function (options) {
+  // 作为参数传递进来的options对象
+  // {
+  //   // sourceMap这里是true
+  //   sourceMap: true,
+  //   // 是否提取css到单独的css文件
+  //   extract: true,
+  //   // 是否使用postcss
+  //   usePostCSS: true
+  // }
   options = options || {}
 
   const cssLoader = {
@@ -73,6 +84,14 @@ exports.cssLoaders = function (options) {
 
 // Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function (options) {
+  // {
+  //   // sourceMap这里是true
+  //   sourceMap: true,
+  //   // 是否提取css到单独的css文件
+  //   extract: true,
+  //   // 是否使用postcss
+  //   usePostCSS: true
+  // }
   const output = []
   const loaders = exports.cssLoaders(options)
 

@@ -23,22 +23,29 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 // 用DefinePlugin定义环境
 const env = process.env.NODE_ENV === 'testing'
+  // 这里是 { NODE_ENV: '"testing"' }
   ? require('../config/test.env')
+  // 这里是 { NODE_ENV: '"production"' }
   : require('../config/prod.env')
 // 合并基本webpack配置
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     // 通过styleLoaders函数生成样式的一些规则
     rules: utils.styleLoaders({
+      // sourceMap这里是true
       sourceMap: config.build.productionSourceMap,
+      // 是否提取css到单独的css文件
       extract: true,
+      // 是否使用postcss
       usePostCSS: true
     })
   },
-  // 配置使用sourceMap
+  // 配置使用sourceMap true 这里是 #source-map
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
+    // 这里是根目录下的dist
     path: config.build.assetsRoot,
+    // 文件名称 chunkhash
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
@@ -63,7 +70,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           // pure_funcs: [ 'console.log', 'console.log.apply' ],
         }
       },
-      //
+      // 是否开启sourceMap 这里是true
       sourceMap: config.build.productionSourceMap,
       // 平行处理（同时处理）加快速度
       parallel: true
@@ -83,6 +90,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
+      // 这里配置是true
       cssProcessorOptions: config.build.productionSourceMap
         ? { safe: true, map: { inline: false } }
         : { safe: true }
@@ -94,10 +102,12 @@ const webpackConfig = merge(baseWebpackConfig, {
       // 输出html名称
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'
+        // 这里是 根目录下的dist/index.html
         : config.build.index,
       // 使用哪个模板
       template: 'index.html',
       inject: true,
+      // 压缩
       minify: {
         // 删除注释
         removeComments: true,
@@ -119,6 +129,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 开启作用域提升 webpack3新的特性，作用是让代码文件更小、运行的更快
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
+    // 提取公共代码
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks (module) {
@@ -156,6 +167,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
+        // 这里配置是static
         to: config.build.assetsSubDirectory,
         // 忽略.开头的文件。比如这里的.gitkeep，这个文件是指空文件夹也提交到git
         ignore: ['.*']
@@ -163,7 +175,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-// 如果开始gzip压缩，使用compression-webpack-plugin插件处理。默认是false
+// 如果开始gzip压缩，使用compression-webpack-plugin插件处理。这里配置是false
 // 需要使用是需要安装 npm i compression-webpack-plugin -D
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
@@ -172,6 +184,7 @@ if (config.build.productionGzip) {
     new CompressionWebpackPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
+      // config.build.productionGzipExtensions 这里是['js', 'css']
       test: new RegExp(
         '\\.(' +
         config.build.productionGzipExtensions.join('|') +
@@ -183,7 +196,8 @@ if (config.build.productionGzip) {
   )
 }
 
-// 输出分析的插件 npm run build --report
+// 输出分析的插件 运行npm run build --report
+// config.build.bundleAnalyzerReport这里是 process.env.npm_config_report
 // build结束后会自定打开 http://127.0.0.1:8888 链接
 if (config.build.bundleAnalyzerReport) {
   // 更多查看链接地址：https://www.npmjs.com/package/webpack-bundle-analyzer

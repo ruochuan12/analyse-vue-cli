@@ -22,7 +22,7 @@ const webpackConfig = require('./webpack.prod.conf')
 const spinner = ora('building for production...')
 spinner.start()
 
-// 删除原有构建输出的目录文件
+// 删除原有构建输出的目录文件 这里是dist 和 static
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   // 如果出错，抛出错误
   if (err) throw err

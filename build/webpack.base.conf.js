@@ -23,12 +23,13 @@ const createLintingRule = () => ({
     // 使用友好的eslint提示插件
     formatter: require('eslint-friendly-formatter'),
     // eslint报错提示是否显示以遮罩形式显示在浏览器中
+    // 这里showEslintErrorsInOverlay配置是false
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
 
 module.exports = {
-  // 运行环境的上下文，就是实际的目录
+  // 运行环境的上下文，就是实际的目录，也就是项目根目录
   context: path.resolve(__dirname, '../'),
   // 入口
   entry: {
@@ -36,12 +37,14 @@ module.exports = {
   },
   // 输出
   output: {
-    // 路径
+    // 路径 这里是根目录下的dist
     path: config.build.assetsRoot,
     // 文件名
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
+      // 这里是 /，但要上传到github pages等会路径不对，需要修改为./
       ? config.build.assetsPublicPath
+      // 这里配置是 /
       : config.dev.assetsPublicPath
   },
   // Webpack 在启动后会从配置的入口模块出发找出所有依赖的模块，Resolve 配置 Webpack 如何寻找模块所对应的文件。
@@ -60,7 +63,7 @@ module.exports = {
   // 定义一些文件的转换规则
   module: {
     rules: [
-      // 是否使用eslint
+      // 是否使用eslint 这里配置是true
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
