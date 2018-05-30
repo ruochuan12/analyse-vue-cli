@@ -46,12 +46,15 @@ exports.cssLoaders = function (options) {
   }
 
   // generate loader string to be used with extract text plugin
+  // 创建对应的loader配置
   function generateLoaders (loader, loaderOptions) {
+    // 是否使用usePostCSS，来决定是否采用postcssLoader
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
+        // 合并 loaderOptions 生成options
         options: Object.assign({}, loaderOptions, {
           sourceMap: options.sourceMap
         })
@@ -61,8 +64,13 @@ exports.cssLoaders = function (options) {
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
+      // 如果提取使用ExtractTextPlugin插件提取
+      // 更多配置 看插件中文文档：https://webpack.docschina.org/plugins/extract-text-webpack-plugin/
       return ExtractTextPlugin.extract({
+        // 指需要什么样的loader去编译文件
+        // loader 被用于将资源转换成一个 CSS 导出模块 (必填)
         use: loaders,
+        // loader（例如 'style-loader'）应用于当 CSS 没有被提取(也就是一个额外的 chunk，当 allChunks: false)
         fallback: 'vue-style-loader'
       })
     } else {
@@ -75,6 +83,10 @@ exports.cssLoaders = function (options) {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
+    // sass indentedSyntax 语法缩进，类似下方格式
+    // #main
+    //   color: blue
+    //   font-size: 0.3em
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),
@@ -105,6 +117,8 @@ exports.styleLoaders = function (options) {
 
   return output
 }
+
+// npm run dev 出错时， FriendlyErrorsPlugin插件 配置 onErrors输出错误信息
 exports.createNotifierCallback = () => {
   // 'node-notifier'是一个跨平台系统通知的页面，当遇到错误时，它能用系统原生的推送方式给你推送信息
   const notifier = require('node-notifier')

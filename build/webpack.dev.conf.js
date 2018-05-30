@@ -98,10 +98,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
-    // https://github.com/ampedandwired/html-webpack-plugin
+    // github仓库 https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
+      // inject 默认值 true，script标签位于html文件的 body 底部
+      // body 通true, header, script 标签位于 head 标签内
+      // false 不插入生成的 js 文件，只是单纯的生成一个 html 文件
       inject: true
     }),
     // copy custom static assets
@@ -123,6 +126,8 @@ module.exports = new Promise((resolve, reject) => {
   // process.env.PORT 可以在命令行指定端口号，比如PORT=2000 npm run dev，那访问就是http://localhost:2000
   // config.dev.port 这里配置是 8080
   portfinder.basePort = process.env.PORT || config.dev.port
+  // 以配置的端口为基准，寻找可用的端口，比如：如果8080占用，那就8081,以此类推
+  // github仓库 https://github.com/indexzero/node-portfinder
   portfinder.getPort((err, port) => {
     if (err) {
       reject(err)
@@ -138,6 +143,7 @@ module.exports = new Promise((resolve, reject) => {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         // notifyOnErrors 这里配置是 true
+        // onErrors 是一个函数，出错输出错误信息
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()
         : undefined

@@ -19,7 +19,7 @@ module.exports = {
   ],
   // required to lint *.vue files
   plugins: [
-    // eslint-plugin-vue 插件
+    // eslint-plugin-vue 插件，使eslint对Vue文件生效
     'vue'
   ],
   // add your custom rules here

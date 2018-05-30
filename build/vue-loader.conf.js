@@ -9,6 +9,7 @@ const sourceMapEnabled = isProduction
   : config.dev.cssSourceMap
 // 更多配置 可以查看vue-loader中文文档：https://vue-loader-v14.vuejs.org/zh-cn/
 module.exports = {
+  // cssLoaders 生成相应loader配置，具体看utils文件中的cssLoader
   loaders: utils.cssLoaders({
     // 是否开启sourceMap，便于调试
     sourceMap: sourceMapEnabled,

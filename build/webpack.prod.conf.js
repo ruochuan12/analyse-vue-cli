@@ -47,6 +47,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: config.build.assetsRoot,
     // 文件名称 chunkhash
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
+    // chunks名称 chunkhash
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
@@ -106,6 +107,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         : config.build.index,
       // 使用哪个模板
       template: 'index.html',
+      // inject 默认值 true，script标签位于html文件的 body 底部
+      // body 通true, header, script 标签位于 head 标签内
+      // false 不插入生成的 js 文件，只是单纯的生成一个 html 文件
       inject: true,
       // 压缩
       minify: {

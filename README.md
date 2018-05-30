@@ -21,7 +21,8 @@ vue init <template-name> <project-name>
 vue init webpack analyse-vue-cli
 ```
 更多`vue-cli`如何工作的可以查看这篇文章[vue-cli是如何工作的](https://juejin.im/post/5a7b1b86f265da4e8f049081)
-或者直接查看[vue-cli github仓库源码](https://github.com/vuejs/vue-cli/tree/master)
+或者分析Vue-cli源码，查看这篇[走进Vue-cli源码，自己动手搭建前端脚手架工具](https://segmentfault.com/a/1190000013975247)
+再或者直接查看[vue-cli github仓库源码](https://github.com/vuejs/vue-cli/tree/master)
 ### `package.json`
 分析一个项目，一般从`package.json`开始。先从`scripts`的命令开始。
 ```
