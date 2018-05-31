@@ -151,7 +151,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     // prevent vendor hash from being updated whenever app bundle is updated
     // 提取公共代码
     new webpack.optimize.CommonsChunkPlugin({
+      // 把公共的部分放到 manifest 中
       name: 'manifest',
+      // 传入 `Infinity` 会马上生成 公共chunk，但里面没有模块。
       minChunks: Infinity
     }),
     // This instance extracts shared chunks from code splitted chunks and bundles them
@@ -160,7 +162,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 提取动态组件
     new webpack.optimize.CommonsChunkPlugin({
       name: 'app',
+      // 如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。
+      // 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，而不是 `true` 来对输出的文件进行更换名称。
       async: 'vendor-async',
+      // 如果设置为 `true`，所有  公共chunk 的子模块都会被选择
       children: true,
       // 最小3个，包含3，chunk的时候提取
       minChunks: 3
@@ -186,15 +191,21 @@ if (config.build.productionGzip) {
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
+      // asset： 目标资源名称。 [file] 会被替换成原始资源。
+      // [path] 会被替换成原始资源的路径， [query] 会被替换成查询字符串。默认值是 "[path].gz[query]"。
       asset: '[path].gz[query]',
+      // algorithm： 可以是 function(buf, callback) 或者字符串。对于字符串来说依照 zlib 的算法(或者 zopfli 的算法)。默认值是 "gzip"。
       algorithm: 'gzip',
+      // test： 所有匹配该正则的资源都会被处理。默认值是全部资源。
       // config.build.productionGzipExtensions 这里是['js', 'css']
       test: new RegExp(
         '\\.(' +
         config.build.productionGzipExtensions.join('|') +
         ')$'
       ),
+      // threshold： 只有大小大于该值的资源会被处理。单位是 bytes。默认值是 0。
       threshold: 10240,
+      // minRatio： 只有压缩率小于这个值的资源才会被处理。默认值是 0.8。
       minRatio: 0.8
     })
   )

@@ -1,3 +1,5 @@
+// 使用严格模式，更多严格模式可以查看
+// [阮一峰老师的es标准入门](http://es6.ruanyifeng.com/?search=%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F&x=0&y=0#docs/function#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F)
 'use strict'
 const path = require('path')
 // 引入工具函数
@@ -107,9 +109,14 @@ module.exports = {
       }
     ]
   },
+  // 这里的node是一个对象，其中每个属性都是 Node.js 全局变量或模块的名称，每个 value 是以下其中之一
+  // empty 提供空对象。
+  // false 什么都不提供。
+  // 更多查看 中文文档：https://webpack.docschina.org/configuration/node/
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
+    // 防止webpack注入一些polyfill 因为Vue已经包含了这些。
     setImmediate: false,
     // prevent webpack from injecting mocks to Node native modules
     // that does not make sense for the client

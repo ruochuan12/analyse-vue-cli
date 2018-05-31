@@ -18,6 +18,30 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+
+// process模块用来与当前进程互动，可以通过全局变量process访问，不必使用require命令加载。它是一个EventEmitter对象的实例。
+
+// 后面有些process模块用到的，所以这里统一列举下。
+// 更多查看这篇阮一峰的这篇文章 http://javascript.ruanyifeng.com/nodejs/process.html
+
+// process对象提供一系列属性，用于返回系统信息。
+// process.pid：当前进程的进程号。
+// process.version：Node的版本，比如v0.10.18。
+// process.platform：当前系统平台，比如Linux。
+// process.title：默认值为“node”，可以自定义该值。
+// process.argv：当前进程的命令行参数数组。
+// process.env：指向当前shell的环境变量，比如process.env.HOME。
+// process.execPath：运行当前进程的可执行文件的绝对路径。
+// process.stdout：指向标准输出。
+// process.stdin：指向标准输入。
+// process.stderr：指向标准错误。
+
+// process对象提供以下方法：
+// process.exit()：退出当前进程。
+// process.cwd()：返回运行当前脚本的工作目录的路径。_
+// process.chdir()：改变工作目录。
+// process.nextTick()：将一个回调函数放在下次事件循环的顶部。
+
 // host
 const HOST = process.env.HOST
 // 端口
@@ -42,7 +66,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // clientLogLevel 是枚举类型，可取如下之一的值 none | error | warning | info。
     // 默认为 info 级别，即输出所有类型的日志，设置成 none 可以不输出任何日志。
     clientLogLevel: 'warning',
-    // historyApiFallback 用于方便的开发使用了 HTML5 History API 的单页应用。
+    // historyApiFallback boolean object 用于方便的开发使用了 HTML5 History API 的单页应用。
+    // 可以简单true 或者 任意的 404 响应可以提供为 index.html 页面。
     historyApiFallback: {
       rewrites: [
         // config.dev.assetsPublicPath 这里是 /
@@ -96,7 +121,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     // 热更新插件
     new webpack.HotModuleReplacementPlugin(),
+    // 热更新时显示具体的模块路径
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+    // 在编译出现错误时，使用 NoEmitOnErrorsPlugin 来跳过输出阶段。
     new webpack.NoEmitOnErrorsPlugin(),
     // github仓库 https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
