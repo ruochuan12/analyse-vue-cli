@@ -1,5 +1,7 @@
 # `analyse-vue-cli`
 # 分析`vue-cli@2.9.3` 搭建的`webpack`项目工程
+### 前言
+>已经有很多分析`Vue-cli`搭建工程的文章，为什么自己还要写一遍呢。学习就好比是座大山，人们沿着不同的路登山，分享着自己看到的风景。你不一定能看到别人看到的风景，体会到别人的心情。只有自己去登山，才能看到不一样的风景，体会才更加深刻。
 ### 使用`vue-cli`初始化`webpack`工程
 ```
 // # 安装
@@ -56,5 +58,10 @@ vue init webpack analyse-vue-cli
 
 更多`package.json`的配置项，可以查看[阮一峰老师的文章 package.json文件](http://javascript.ruanyifeng.com/nodejs/packagejson.html)
 
+`npm run dev`指定了`build/webpack.dev.conf.js`配置去启动服务，那么我们来看下这个文件做了什么。
+
 ### `build/webpack.dev.conf.js`
+这个文件主要做了几件事情：
+1、引入各种依赖
+2、
 

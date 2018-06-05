@@ -64,6 +64,7 @@
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
     "nightwatch": "^0.9.12",
+    // 系统通知的提示
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
@@ -71,6 +72,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    // 删除文件和文件夹
     "rimraf": "^2.6.0",
     "selenium-server": "^3.0.1",
     "semver": "^5.3.0",
@@ -85,17 +87,23 @@
     // 把 vue-loader 提取出的 HTML 模版编译成对应的可执行的 JavaScript 代码，这和 React 中的 JSX 语法被编译成 JavaScript 代码类似。预先编译好 HTML 模版相对于在浏览器中再去编译 HTML 模版的好处在于性能更好。
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
+    // 构建分析的插件
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
+  // 指定版本
   "engines": {
     "node": ">= 6.0.0",
     "npm": ">= 3.0.0"
   },
+  // 浏览器列表
   "browserslist": [
+    // 全球有超过1%的人使用的浏览器
     "> 1%",
+    // 根据 http://caniuse.com 追踪的最后两个版本的所有浏览器
     "last 2 versions",
+    // 不是IE8、IE7等浏览器
     "not ie <= 8"
   ]
 }

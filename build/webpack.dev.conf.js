@@ -14,8 +14,9 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 生成html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 友好提示的插件
+// 友好提示的插件 https://github.com/geowarin/friendly-errors-webpack-plugin
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+// 查找可用端口 // github仓库 https://github.com/indexzero/node-portfinder
 const portfinder = require('portfinder')
 
 
@@ -170,7 +171,7 @@ module.exports = new Promise((resolve, reject) => {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         // notifyOnErrors 这里配置是 true
-        // onErrors 是一个函数，出错输出错误信息
+        // onErrors 是一个函数，出错输出错误信息，系统原生的通知
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()
         : undefined

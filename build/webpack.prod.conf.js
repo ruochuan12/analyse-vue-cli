@@ -115,7 +115,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       minify: {
         // 删除注释
         removeComments: true,
-        // 删除空格
+        // 删除空格和换行
         collapseWhitespace: true,
         // 删除html标签中属性的双引号
         removeAttributeQuotes: true
@@ -124,6 +124,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      // 在chunk被插入到html之前，你可以控制它们的排序。允许的值 ‘none’ | ‘auto’ | ‘dependency’ | {function} 默认为‘auto’.
       chunksSortMode: 'dependency'
     }),
     // keep module.id stable when vendor modules does not change
