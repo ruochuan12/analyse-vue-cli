@@ -27,6 +27,9 @@ vue init webpack analyse-vue-cli
 更多`vue-cli`如何工作的可以查看这篇文章[vue-cli是如何工作的](https://juejin.im/post/5a7b1b86f265da4e8f049081)
 或者分析Vue-cli源码，查看这篇[走进Vue-cli源码，自己动手搭建前端脚手架工具](https://segmentfault.com/a/1190000013975247)
 再或者直接查看[vue-cli github仓库源码](https://github.com/vuejs/vue-cli/tree/master)
+
+如果对`webpack`还不是很了解，可以查看[webpack官方文档中的概念](https://webpack.docschina.org/concepts/)，虽然是最新版本的，但概念都是差不多的。
+
 ### `package.json`
 分析一个项目，一般从`package.json`的命令入口`scripts`开始。
 ```
@@ -991,7 +994,17 @@ if (config.build.bundleAnalyzerReport) {
 module.exports = webpackConfig
 
 ```
-至此，我们就分析完了`package.json`中的`npm run dev`和`npm run build`两个命令。测试相关的类似就略过吧。`.eslintrc.js`中的配置不多，更多可以查看[eslint英文文档](https://eslint.org/)或[`eslint`中文官网](http://eslint.cn/)，所以也略过吧。
+至此，我们就分析完了`package.json`中的`npm run dev`和`npm run build`两个命令。测试相关的类似就略过吧。
+
+`npm run lint`，`.eslintrc.js`中的配置不多，更多可以查看[eslint英文文档](https://eslint.org/)或[`eslint`中文官网](http://eslint.cn/)，所以也略过吧。不过提一下，把`eslint`整合到`git`工作流。可以安装`husky`，`npm i husky -S`。安装后，配置`package.json`的`scripts`中，配置`precommit`，具体如下：
+```
+"scripts": {
+  "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
+  "precommit": "npm run lint",
+},
+```
+配置好后，每次`git commit -m`提交会检查代码是否通过`eslint`校验，如果没有校验通过则提交失败。还可以配置`prepush`。`husky`不断在更新，现在可能与原先的配置不太相同了，具体查看[husky github仓库](https://github.com/typicode/husky)。原理就是`git-hooks`,`pre-commit`的钩子。对`shell`脚本熟悉的同学也可以自己写一份`pre-commit`。复制到项目的`.git/hooks/pre-commit`中。不需要依赖`husky`包。我司就是用的`shell`脚本。
+
 
 最后提一下`.babelrc`文件中的配置。
 
