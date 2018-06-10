@@ -3,7 +3,7 @@
 ### 前言
 >已经有很多分析`Vue-cli`搭建工程的文章，为什么自己还要写一遍呢。学习就好比是座大山，人们沿着不同的路登山，分享着自己看到的风景。你不一定能看到别人看到的风景，体会到别人的心情。只有自己去登山，才能看到不一样的风景，体会才更加深刻。
 
-**项目放在个人`github`上，[分析vue-cli@2.9.3 搭建的webpack项目工程](https://github.com/lxchuan12/analyse-vue-cli)。方便大家克隆下载。同时也求个`star` `^_^`，也是对笔者的一种鼓励和支持。**
+**项目放在笔者的`github`上，[分析vue-cli@2.9.3 搭建的webpack项目工程](https://github.com/lxchuan12/analyse-vue-cli)。方便大家克隆下载，或者在线查看。同时也求个`star` `^_^`，也是对笔者的一种鼓励和支持。**
 ### 使用`vue-cli`初始化`webpack`工程
 ```
 // # 安装
@@ -28,7 +28,7 @@ vue init webpack analyse-vue-cli
 或者分析Vue-cli源码，查看这篇[走进Vue-cli源码，自己动手搭建前端脚手架工具](https://segmentfault.com/a/1190000013975247)
 再或者直接查看[vue-cli github仓库源码](https://github.com/vuejs/vue-cli/tree/master)
 ### `package.json`
-分析一个项目，一般从`package.json`开始。先从`scripts`的命令开始。
+分析一个项目，一般从`package.json`的命令入口`scripts`开始。
 ```
 "scripts": {
   // dev webpack-dev-server --inline 模式 --progress 显示进度 --config 指定配置文件（默认是webpack.config.js）
@@ -62,12 +62,12 @@ vue init webpack analyse-vue-cli
 
 `npm run dev`指定了`build/webpack.dev.conf.js`配置去启动服务，那么我们来看下这个文件做了什么。
 
-### `build/webpack.dev.conf.js`
-这个文件主要做了几件事情：
-1、引入各种依赖，同时也引入了`config`文件夹下的变量和配置，和一个工具函数`build/utils`。
-2、合并`build/webpack.base.conf.js`配置文件。
-3、配置开发环境一些`devServer`,`plugin`等配置。
-4、最后导出了一个`Promise`,根据配置的端口，寻找可用的端口来启动服务。
+### `build/webpack.dev.conf.js` `webpack`开发环境配置
+这个文件主要做了以下几件事情：
+1、引入各种依赖，同时也引入了`config`文件夹下的变量和配置，和一个工具函数`build/utils.js`，
+2、合并`build/webpack.base.conf.js`配置文件，
+3、配置开发环境一些`devServer`，`plugin`等配置，
+4、最后导出了一个`Promise`，根据配置的端口，寻找可用的端口来启动服务。
 
 具体可以看`build/webpack.dev.conf.js`这个文件注释。
 
@@ -257,10 +257,10 @@ module.exports = new Promise((resolve, reject) => {
 })
 ```
 
-### `build/utils` 工具函数
+### `build/utils.js` 工具函数
 
-上文提到`build/utils`，工具函数，
-该文件主要写了几个工具函数，
+上文`build/webpack.dev.conf.js`提到引入了`build/utils.js`工具函数。
+该文件主要写了以下几个工具函数：
 1、`assetsPath`返回输出路径，
 2、`cssLoaders`返回相应的`css-loader`配置，
 3、`styleLoaders`返回相应的处理样式的配置，
@@ -412,13 +412,13 @@ exports.createNotifierCallback = () => {
 
 ```
 
-### `build/webpack.base.conf.js` webpack基本配置文件
+### `build/webpack.base.conf.js` `webpack`基本配置文件
 
-上文提到`build/webpack.base.conf.js`这个基本配置文件。
-这个文件主要做了几件事情：
-1、引入各种插件、配置等，其中引入了`build/vue-loader.conf.js`相关配置
-2、创建`eslint`规则配置，默认启用。
-3、导出webpack配置对象，其中包含`context`，入口`entry`，输出`output`，`resolve`，`module`下的`rules`（处理对应文件的规则），和node相关的配置等。
+上文`build/webpack.dev.conf.js`提到引入了`build/webpack.base.conf.js`这个`webpack`基本配置文件。
+这个文件主要做了以下几件事情：
+1、引入各种插件、配置等，其中引入了`build/vue-loader.conf.js`相关配置，
+2、创建`eslint`规则配置，默认启用，
+3、导出`webpack`配置对象，其中包含`context`，入口`entry`，输出`output`，`resolve`，`module`下的`rules`（处理对应文件的规则），和`node`相关的配置等。
 
 具体可以看这个文件注释：
 
@@ -554,11 +554,11 @@ module.exports = {
 }
 ```
 
-### `build/vue-loader.conf.js`
+### `build/vue-loader.conf.js` `vue-loader`配置文件
 
-上文提到引入了`build/vue-loader.conf.js`
+上文`build/webpack.dev.conf.js`提到引入了`build/vue-loader.conf.js`。
 
-这个文件主要导出了一份配置
+这个文件主要导出了一份`Vue-loader`的配置，
 主要有：`loaders`，`cssSourceMap`，`cacheBusting`，`transformToRequire`。
 
 具体看该文件注释：
@@ -599,16 +599,16 @@ module.exports = {
 ```
 
 看完了这些文件相应配置，开发环境的相关配置就串起来了。
-其中`config/`文件夹下的配置，笔者都已经注释在对应的文件中，所以就不单独说明了。
+其中`config/`文件夹下的配置，笔者都已经注释在`build/`文件夹下的对应的文件中，所以就不单独说明了。
 
-那回过头来看，`package.json`的`scripts`的`npm run build`配置，`node build/build.js`，其实就是用`node`去执行`build/build.js`文件。
+那回过头来看，`package.json`的`scripts`中的`npm run build`配置，`node build/build.js`，其实就是用`node`去执行`build/build.js`文件。
 
-### `build/build.js` `npm run build` 先执行的文件
+### `build/build.js` `npm run build` 指定执行的文件
 
-这个文件主要做了几件事情。
-1、引入`build/check-versions`文件，检查`node`和`npm`的版本。
-2、引入相关插件和配置，其中引入了`webpack`生产环境的配置`build/webpack.prod.conf.js`
-3、先控制台输出`loading`，删除dist目录下的文件，开始构建，构建失败和构建成功都给出相应的提示信息。
+这个文件主要做了以下几件事情：
+1、引入`build/check-versions`文件，检查`node`和`npm`的版本，
+2、引入相关插件和配置，其中引入了`webpack`生产环境的配置`build/webpack.prod.conf.js`，
+3、先控制台输出`loading`，删除`dist`目录下的文件，开始构建，构建失败和构建成功都给出相应的提示信息。
 
 具体可以查看相应的注释：
 
@@ -747,13 +747,13 @@ module.exports = function () {
 ### `build/webpack.prod.conf.js` `webpack`生产环境配置
 
 上文`build/build.js`提到，引入了这个配置文件。
-这个文件主要做了几件事情，
-1、引入一些插件和配置，其中引入了`build/webpack.base.conf.js` `webpack`基本配置文件
-2、用`DefinePlugin`定义环境
-3、合并基本配置，定义自己的配置`webpackConfig`，配置了一些`modules`下的`rules`，`devtools`配置，`output`输出配置，一些处理`js`,提取`css`,压缩`css`，输出`html`插件，提取公共代码等的
-`plugins`。
-4、如果启用`gzip`，再使用相应的插件处理
-5、如果启用了分析打包后的插件，则用`webpack-bundle-analyzer`
+这个文件主要做了以下几件事情：
+1、引入一些插件和配置，其中引入了`build/webpack.base.conf.js` `webpack`基本配置文件，
+2、用`DefinePlugin`定义环境，
+3、合并基本配置，定义自己的配置`webpackConfig`，配置了一些`modules`下的`rules`，`devtools`配置，`output`输出配置，一些处理`js`、提取`css`、压缩`css`、输出`html`插件、提取公共代码等的
+`plugins`，
+4、如果启用`gzip`，再使用相应的插件处理，
+5、如果启用了分析打包后的插件，则用`webpack-bundle-analyzer`，
 6、最后导出这份配置。
 
 具体可以查看这个文件配置注释：
@@ -991,12 +991,12 @@ if (config.build.bundleAnalyzerReport) {
 module.exports = webpackConfig
 
 ```
-至此，我们就分析完了`package.json`中的`npm run dev`和`npm run build`两个命令。测试相关的类似就略过吧。`eslint`的也有相应注释，比较简单，也略过吧。
+至此，我们就分析完了`package.json`中的`npm run dev`和`npm run build`两个命令。测试相关的类似就略过吧。`.eslintrc.js`中的配置不多，更多可以查看[eslint英文文档](https://eslint.org/)或[`eslint`中文官网](http://eslint.cn/)，所以也略过吧。
 
-最后讲一下`.babelrc`文件中的配置。
+最后提一下`.babelrc`文件中的配置。
 
 ### `.babelrc` `babel`相关配置
-配置了一些转码规则。这里附上两个链接：[`babel`的中文](https://babel.bootcss.com/)，[`babel`英文](https://babeljs.io/)
+配置了一些转码规则。这里附上两个链接：[`babel`英文官网](https://babeljs.io/)和[`babel`的中文官网](https://babel.bootcss.com/)。
 
 具体看文件中的配置注释：
 ```
@@ -1041,10 +1041,11 @@ env 包含当前所有 ECMAScript 标准里的最新特性。
 `stage3` 该特性规范已经定稿，各大浏览器厂商和 `` 社区开始着手实现；
 `stage4` 在接下来的一年将会加入到标准里去。
 
-至此，就算相对完整的分析完了`Vue-cli`(版本v2.9.3)搭建的`webpack`项目工程。希望对大家有所帮助。
-**项目放在个人`github`上，[分析vue-cli@2.9.3 搭建的webpack项目工程](https://github.com/lxchuan12/analyse-vue-cli)。方便大家克隆下载。同时也求个`star` `^_^`，也是对笔者的一种鼓励和支持。**
+至此，就算相对完整的分析完了`Vue-cli`(版本`v2.9.3`)搭建的`webpack`项目工程。希望对大家有所帮助。
+**项目放在笔者的`github`上，[分析vue-cli@2.9.3 搭建的webpack项目工程](https://github.com/lxchuan12/analyse-vue-cli)。方便大家克隆下载，或者在线查看。同时也求个`star` `^_^`，也是对笔者的一种鼓励和支持。**
 笔者知识能力有限，文章有什么不妥之处，欢迎指出~
 
 ### 小结
 1、分析这些，逐行注释，还是需要一些时间的。其中有些不是很明白的地方，及时查阅相应的官方文档和插件文档（建议看英文文档和最新的文档），不过文档没写明白的地方，可以多搜索一些别人的博客文章，相对比较清晰明了。
 2、前端发展太快，这个`Vue-cli@2.9.3` `webpack`版本还是`v3.x`，webpack现在官方版本已经是`v4.12.0`，相信不久后，`Vue-cli`也将发布支持`webpack v4.x`的版本，`v3.0.0`已经是`beta.16`了。
+3、后续有余力，可能会继续分析新版的`vue-cli`构建的`webpack`项目工程。
