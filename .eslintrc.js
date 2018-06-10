@@ -2,6 +2,7 @@
 
 module.exports = {
   root: true,
+  // 用什么插件解析
   parserOptions: {
     parser: 'babel-eslint'
   },

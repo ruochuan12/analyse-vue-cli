@@ -17,10 +17,10 @@
     "e2e": "node test/e2e/runner.js",
     // 运行jest测试和e2e测试
     "test": "npm run unit && npm run e2e",
-    // eslint
+    // eslint --ext 指定扩展名和相应的文件
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     // node 执行build/build.js文件
-  "build": "node build/build.js"
+    "build": "node build/build.js"
   },
   // 生产环境依赖
   "dependencies": {

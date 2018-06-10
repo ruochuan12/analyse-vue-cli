@@ -29,7 +29,7 @@ if (shell.which('npm')) {
     versionRequirement: packageConfig.engines.npm
   })
 }
-// 导出一个检测版本的函数
+// 导出一个检查版本的函数
 module.exports = function () {
   const warnings = []
 
