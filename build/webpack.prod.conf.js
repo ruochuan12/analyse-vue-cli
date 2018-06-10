@@ -62,7 +62,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         compress: {
           // 警告
           warnings: false
-          // 构建后的文件
+          // 构建后的文件 常用的配置还有这些
           // 去除console.log 默认为false。  传入true会丢弃对console函数的调用。
           // drop_console: true,
           // 去除debugger
@@ -125,6 +125,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       // 在chunk被插入到html之前，你可以控制它们的排序。允许的值 ‘none’ | ‘auto’ | ‘dependency’ | {function} 默认为‘auto’.
+      // dependency 依赖（从属）
       chunksSortMode: 'dependency'
     }),
     // keep module.id stable when vendor modules does not change

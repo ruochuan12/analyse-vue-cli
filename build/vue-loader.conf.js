@@ -19,6 +19,7 @@ module.exports = {
   // 是否开启cssSourceMap，便于调试
   cssSourceMap: sourceMapEnabled,
   // 这里是true
+  // 缓存破坏，进行sourceMap debug时，设置成false很有帮助。
   cacheBusting: config.dev.cacheBusting,
   // vue单文件中，在模板中的图片等资源引用转成require的形式。以便目标资源可以由 webpack 处理。
   transformToRequire: {

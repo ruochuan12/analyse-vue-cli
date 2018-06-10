@@ -95,6 +95,7 @@ exports.cssLoaders = function (options) {
 }
 
 // Generate loaders for standalone style files (outside of .vue)
+// 最终会返回webpack css相关的配置
 exports.styleLoaders = function (options) {
   // {
   //   // sourceMap这里是true

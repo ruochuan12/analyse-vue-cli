@@ -97,7 +97,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       : false,
       // 这里配置的是 /
     publicPath: config.dev.assetsPublicPath,
-    // 代理 这里配置的是空{}
+    // 代理 这里配置的是空{},有需要可以自行配置
     proxy: config.dev.proxyTable,
     // 启用 quiet 后，除了初始启动信息之外的任何内容都不会被打印到控制台。这也意味着来自 webpack 的错误或警告在控制台不可见。
     // 开启后一般非常干净只有类似的提示 Your application is running here: http://localhost:8080
