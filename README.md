@@ -1,9 +1,11 @@
-# `analyse-vue-cli`
 # 分析`vue-cli@2.9.3` 搭建的`webpack`项目工程
 ### 前言
 >已经有很多分析`Vue-cli`搭建工程的文章，为什么自己还要写一遍呢。学习就好比是座大山，人们沿着不同的路登山，分享着自己看到的风景。你不一定能看到别人看到的风景，体会到别人的心情。只有自己去登山，才能看到不一样的风景，体会才更加深刻。
 
 **项目放在笔者的`github`上，[分析vue-cli@2.9.3 搭建的webpack项目工程](https://github.com/lxchuan12/analyse-vue-cli)。方便大家克隆下载，或者在线查看。同时也求个`star` `^_^`，也是对笔者的一种鼓励和支持。**
+
+正文从这里开始～
+
 ### 使用`vue-cli`初始化`webpack`工程
 ```
 // # 安装
@@ -24,9 +26,7 @@ vue init <template-name> <project-name>
 // # 例子
 vue init webpack analyse-vue-cli
 ```
-更多`vue-cli`如何工作的可以查看这篇文章[vue-cli是如何工作的](https://juejin.im/post/5a7b1b86f265da4e8f049081)
-或者分析Vue-cli源码，查看这篇[走进Vue-cli源码，自己动手搭建前端脚手架工具](https://segmentfault.com/a/1190000013975247)
-再或者直接查看[vue-cli github仓库源码](https://github.com/vuejs/vue-cli/tree/master)
+更多`vue-cli`如何工作的可以查看这篇文章[vue-cli是如何工作的](https://juejin.im/post/5a7b1b86f265da4e8f049081)，或者分析Vue-cli源码查看这篇[走进Vue-cli源码，自己动手搭建前端脚手架工具](https://segmentfault.com/a/1190000013975247)，再或者直接查看[vue-cli github仓库源码](https://github.com/vuejs/vue-cli/tree/master)
 
 如果对`webpack`还不是很了解，可以查看[webpack官方文档中的概念](https://webpack.docschina.org/concepts/)，虽然是最新版本的，但概念都是差不多的。
 
@@ -50,7 +50,9 @@ vue init webpack analyse-vue-cli
 },
 ```
 `Npm Script` 底层实现原理是通过调用 `Shell` 去运行脚本命令。`npm run start`等同于运行`npm run dev`。
+
 `Npm Script` 还有一个重要的功能是能运行安装到项目目录里的 `node_modules` 里的可执行模块。
+
 例如在通过命令`npm i -D webpack-dev-server`将`webpack-dev-server`安装到项目后，是无法直接在项目根目录下通过命令 `webpack-dev-server` 去执行 `webpack-dev-server` 构建的，而是要通过命令 `./node_modules/.bin/webpack-dev-server` 去执行。
 
 `Npm Script` 能方便的解决这个问题，只需要在 `scripts` 字段里定义一个任务，例如：
@@ -66,13 +68,13 @@ vue init webpack analyse-vue-cli
 `npm run dev`指定了`build/webpack.dev.conf.js`配置去启动服务，那么我们来看下这个文件做了什么。
 
 ### `build/webpack.dev.conf.js` `webpack`开发环境配置
-这个文件主要做了以下几件事情：
-1、引入各种依赖，同时也引入了`config`文件夹下的变量和配置，和一个工具函数`build/utils.js`，
-2、合并`build/webpack.base.conf.js`配置文件，
-3、配置开发环境一些`devServer`，`plugin`等配置，
+这个文件主要做了以下几件事情：<br>
+1、引入各种依赖，同时也引入了`config`文件夹下的变量和配置，和一个工具函数`build/utils.js`，<br>
+2、合并`build/webpack.base.conf.js`配置文件，<br>
+3、配置开发环境一些`devServer`，`plugin`等配置，<br>
 4、最后导出了一个`Promise`，根据配置的端口，寻找可用的端口来启动服务。
 
-具体可以看`build/webpack.dev.conf.js`这个文件注释。
+具体可以看`build/webpack.dev.conf.js`这个文件注释：
 
 ```
 'use strict'
@@ -262,11 +264,11 @@ module.exports = new Promise((resolve, reject) => {
 
 ### `build/utils.js` 工具函数
 
-上文`build/webpack.dev.conf.js`提到引入了`build/utils.js`工具函数。
-该文件主要写了以下几个工具函数：
-1、`assetsPath`返回输出路径，
-2、`cssLoaders`返回相应的`css-loader`配置，
-3、`styleLoaders`返回相应的处理样式的配置，
+上文`build/webpack.dev.conf.js`提到引入了`build/utils.js`工具函数。<br>
+该文件主要写了以下几个工具函数：<br>
+1、`assetsPath`返回输出路径，<br>
+2、`cssLoaders`返回相应的`css-loader`配置，<br>
+3、`styleLoaders`返回相应的处理样式的配置，<br>
 4、`createNotifierCallback`创建启动服务时出错时提示信息回调。
 
 具体配置可以看该文件注释：
@@ -417,10 +419,10 @@ exports.createNotifierCallback = () => {
 
 ### `build/webpack.base.conf.js` `webpack`基本配置文件
 
-上文`build/webpack.dev.conf.js`提到引入了`build/webpack.base.conf.js`这个`webpack`基本配置文件。
-这个文件主要做了以下几件事情：
-1、引入各种插件、配置等，其中引入了`build/vue-loader.conf.js`相关配置，
-2、创建`eslint`规则配置，默认启用，
+上文`build/webpack.dev.conf.js`提到引入了`build/webpack.base.conf.js`这个`webpack`基本配置文件。<br>
+这个文件主要做了以下几件事情：<br>
+1、引入各种插件、配置等，其中引入了`build/vue-loader.conf.js`相关配置，<br>
+2、创建`eslint`规则配置，默认启用，<br>
 3、导出`webpack`配置对象，其中包含`context`，入口`entry`，输出`output`，`resolve`，`module`下的`rules`（处理对应文件的规则），和`node`相关的配置等。
 
 具体可以看这个文件注释：
@@ -601,16 +603,15 @@ module.exports = {
 
 ```
 
-看完了这些文件相应配置，开发环境的相关配置就串起来了。
-其中`config/`文件夹下的配置，笔者都已经注释在`build/`文件夹下的对应的文件中，所以就不单独说明了。
+看完了这些文件相应配置，开发环境的相关配置就串起来了。其中`config/`文件夹下的配置，笔者都已经注释在`build/`文件夹下的对应的文件中，所以就不单独说明了。
 
 那回过头来看，`package.json`的`scripts`中的`npm run build`配置，`node build/build.js`，其实就是用`node`去执行`build/build.js`文件。
 
 ### `build/build.js` `npm run build` 指定执行的文件
 
-这个文件主要做了以下几件事情：
-1、引入`build/check-versions`文件，检查`node`和`npm`的版本，
-2、引入相关插件和配置，其中引入了`webpack`生产环境的配置`build/webpack.prod.conf.js`，
+这个文件主要做了以下几件事情：<br>
+1、引入`build/check-versions`文件，检查`node`和`npm`的版本，<br>
+2、引入相关插件和配置，其中引入了`webpack`生产环境的配置`build/webpack.prod.conf.js`，<br>
 3、先控制台输出`loading`，删除`dist`目录下的文件，开始构建，构建失败和构建成功都给出相应的提示信息。
 
 具体可以查看相应的注释：
@@ -676,8 +677,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
 
 ### `build/check-versions` 检查`node`和`npm`版本
 
-上文提到`build/check-versions` 检查`node`和`npm`版本，
-这个文件主要引入了一些插件和配置，最后导出一个函数，版本不符合预期就输出警告。
+上文提到`build/check-versions` 检查`node`和`npm`版本，这个文件主要引入了一些插件和配置，最后导出一个函数，版本不符合预期就输出警告。
 
 具体查看这个配置文件注释：
 
@@ -749,14 +749,14 @@ module.exports = function () {
 
 ### `build/webpack.prod.conf.js` `webpack`生产环境配置
 
-上文`build/build.js`提到，引入了这个配置文件。
-这个文件主要做了以下几件事情：
-1、引入一些插件和配置，其中引入了`build/webpack.base.conf.js` `webpack`基本配置文件，
-2、用`DefinePlugin`定义环境，
+上文`build/build.js`提到，引入了这个配置文件。<br>
+这个文件主要做了以下几件事情：<br>
+1、引入一些插件和配置，其中引入了`build/webpack.base.conf.js` `webpack`基本配置文件，<br>
+2、用`DefinePlugin`定义环境，<br>
 3、合并基本配置，定义自己的配置`webpackConfig`，配置了一些`modules`下的`rules`，`devtools`配置，`output`输出配置，一些处理`js`、提取`css`、压缩`css`、输出`html`插件、提取公共代码等的
-`plugins`，
-4、如果启用`gzip`，再使用相应的插件处理，
-5、如果启用了分析打包后的插件，则用`webpack-bundle-analyzer`，
+`plugins`，<br>
+4、如果启用`gzip`，再使用相应的插件处理，<br>
+5、如果启用了分析打包后的插件，则用`webpack-bundle-analyzer`，<br>
 6、最后导出这份配置。
 
 具体可以查看这个文件配置注释：
@@ -1039,26 +1039,33 @@ module.exports = webpackConfig
 }
 ```
 
-文件中`presets`中有配置`env`和`stage-2`，可能不知道是什么。这里引用[深入浅出webpack](http://webpack.wuhaolin.cn/3%E5%AE%9E%E6%88%98/3-1%E4%BD%BF%E7%94%A8ES6%E8%AF%AD%E8%A8%80.html)书中，第三章，`3-1`使用`ES6`语言 小节的一段，解释一下。
->`presets` 属性告诉 `Babel` 要转换的源码使用了哪些新的语法特性，一个 Presets 对一组新语法特性提供支持，多个 `Presets` 可以叠加。 `Presets` 其实是一组 `Plugins` 的集合，每一个 `Plugin` 完成一个新语法的转换工作。`Presets` 是按照 `ECMAScript` 草案来组织的，通常可以分为以下三大类（书中就是说三大类，我发现就两点~~~）：
->1、已经被写入 ECMAScript 标准里的特性，由于之前每年都有新特性被加入到标准里，所以又可细分为：
-es2015 包含在2015里加入的新特性；
-es2016 包含在2016里加入的新特性；
-es2017 包含在2017里加入的新特性；
-es2017 包含在2017里加入的新特性；
-env 包含当前所有 ECMAScript 标准里的最新特性。
->2、被社区提出来的但还未被写入 `ECMAScript` 标准里特性，这其中又分为以下四种：
-`stage0` 只是一个美好激进的想法，有 `Babel` 插件实现了对这些特性的支持，但是不确定是否会被定为标准；
-`stage1` 值得被纳入标准的特性；
-`stage2` 该特性规范已经被起草，将会被纳入标准里；
-`stage3` 该特性规范已经定稿，各大浏览器厂商和 `` 社区开始着手实现；
-`stage4` 在接下来的一年将会加入到标准里去。
+文件中`presets`中有配置`env`和`stage-2`，可能不知道是什么。这里引用[深入浅出webpack](http://webpack.wuhaolin.cn/3%E5%AE%9E%E6%88%98/3-1%E4%BD%BF%E7%94%A8ES6%E8%AF%AD%E8%A8%80.html)书中，第三章，`3-1`使用`ES6`语言 小节的一段，解释一下。<br>
+>`presets` 属性告诉 `Babel` 要转换的源码使用了哪些新的语法特性，一个 Presets 对一组新语法特性提供支持，多个 `Presets` 可以叠加。 `Presets` 其实是一组 `Plugins` 的集合，每一个 `Plugin` 完成一个新语法的转换工作。`Presets` 是按照 `ECMAScript` 草案来组织的，通常可以分为以下三大类（书中就是说三大类，我发现就两点~~~）：<br>
+>1、已经被写入 ECMAScript 标准里的特性，由于之前每年都有新特性被加入到标准里，所以又可细分为：<br>
+es2015 包含在2015里加入的新特性；<br>
+es2016 包含在2016里加入的新特性；<br>
+es2017 包含在2017里加入的新特性；<br>
+es2017 包含在2017里加入的新特性；<br>
+env 包含当前所有 ECMAScript 标准里的最新特性。<br>
+>2、被社区提出来的但还未被写入 `ECMAScript` 标准里特性，这其中又分为以下四种：<br>
+`stage0` 只是一个美好激进的想法，有 `Babel` 插件实现了对这些特性的支持，但是不确定是否会被定为标准；<br>
+`stage1` 值得被纳入标准的特性；<br>
+`stage2` 该特性规范已经被起草，将会被纳入标准里；<br>
+`stage3` 该特性规范已经定稿，各大浏览器厂商和 `` 社区开始着手实现；<br>
+`stage4` 在接下来的一年将会加入到标准里去。<br>
 
-至此，就算相对完整的分析完了`Vue-cli`(版本`v2.9.3`)搭建的`webpack`项目工程。希望对大家有所帮助。
-**项目放在笔者的`github`上，[分析vue-cli@2.9.3 搭建的webpack项目工程](https://github.com/lxchuan12/analyse-vue-cli)。方便大家克隆下载，或者在线查看。同时也求个`star` `^_^`，也是对笔者的一种鼓励和支持。**
+至此，就算相对完整的分析完了`Vue-cli`(版本`v2.9.3`)搭建的`webpack`项目工程。希望对大家有所帮助。<br>
+**项目放在笔者的`github`上，[分析vue-cli@2.9.3 搭建的webpack项目工程](https://github.com/lxchuan12/analyse-vue-cli)。方便大家克隆下载，或者在线查看。同时也求个`star` `^_^`，也是对笔者的一种鼓励和支持。**<br>
 笔者知识能力有限，文章有什么不妥之处，欢迎指出~
 
+### 关于
+[个人博客](https://lxchuan12.github.io/)<br>
+[segmentfault个人主页](https://segmentfault.com/u/lxchuan12)<br>
+[掘金个人主页](https://juejin.im/user/57974dc55bbb500063f522fd/posts)<br>
+[知乎](https://www.zhihu.com/people/lxchuan12/activities)<br>
+[github](https://github.com/lxchuan12)<br>
+
 ### 小结
-1、分析这些，逐行注释，还是需要一些时间的。其中有些不是很明白的地方，及时查阅相应的官方文档和插件文档（建议看英文文档和最新的文档），不过文档没写明白的地方，可以多搜索一些别人的博客文章，相对比较清晰明了。
-2、前端发展太快，这个`Vue-cli@2.9.3` `webpack`版本还是`v3.x`，webpack现在官方版本已经是`v4.12.0`，相信不久后，`Vue-cli`也将发布支持`webpack v4.x`的版本，`v3.0.0`已经是`beta.16`了。
+1、分析这些，逐行注释，还是需要一些时间的。其中有些不是很明白的地方，及时查阅相应的官方文档和插件文档（建议看英文文档和最新的文档），不过文档没写明白的地方，可以多搜索一些别人的博客文章，相对比较清晰明了。<br>
+2、前端发展太快，这个`Vue-cli@2.9.3` `webpack`版本还是`v3.x`，webpack现在官方版本已经是`v4.12.0`，相信不久后，`Vue-cli`也将发布支持`webpack v4.x`的版本，`v3.0.0`已经是`beta.16`了。<br>
 3、后续有余力，可能会继续分析新版的`vue-cli`构建的`webpack`项目工程。
