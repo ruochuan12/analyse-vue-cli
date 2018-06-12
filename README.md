@@ -1059,7 +1059,7 @@ env 包含当前所有 ECMAScript 标准里的最新特性。<br>
 笔者知识能力有限，文章有什么不妥之处，欢迎指出~
 
 ### 关于
-作者：常以**轩辕Rowboat**为名混迹于江湖。前端路上 | PPT爱好者 | 所知甚少，唯善学。<br>
+作者：常以**轩辕Rowboat**为名混迹于江湖。前端路上 | PPT爱好者 | 所知甚少，唯善学<br>
 [个人博客](https://lxchuan12.github.io/)<br>
 [segmentfault个人主页](https://segmentfault.com/u/lxchuan12)<br>
 [掘金个人主页](https://juejin.im/user/57974dc55bbb500063f522fd/posts)<br>
