@@ -3,7 +3,7 @@
   "name": "analyse-vue-cli",
   "version": "1.0.0",
   "description": "analyse-vue-cli",
-  "author": "轩辕Rowboat <lxchuan12@163.com>",
+  "author": "若川 <lxchuan12@163.com>",
   "private": true,
   // Npm Script 底层实现原理是通过调用 Shell 去运行脚本命令
   "scripts": {

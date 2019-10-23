@@ -2,7 +2,7 @@
   "name": "analyse-vue-cli",
   "version": "1.0.0",
   "description": "analyse-vue-cli",
-  "author": "轩辕Rowboat <lxchuan12@163.com>",
+  "author": "若川 <lxchuan12@163.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
